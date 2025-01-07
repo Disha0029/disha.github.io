@@ -1,6 +1,5 @@
-/*CASE 3 The smart city planning there are national parks, amusement parks,ashrams ,malls,jewellery markets and various other tourist spots. but the tourists
-//face difficulty in reaching to those places and also to reach to hotels and restaurants
-//for their stay.*/
+/*CASE 3 Transport issue for the touristsThe smart city planning there are national parks, amusement parks, ashrams ,malls, jewellery markets and various other tourist spots. but the tourists
+face difficulty in reaching to those places and also to reach to hotels and restaurant for their stay.*/
 #include <climits>
 #include <iostream>
 #include <string>
@@ -11,20 +10,26 @@ const int INF = INT_MAX;
 const int MAX_LOCATIONS = 9;
 
 // KMP Pattern Matching Algorithm
-void computeLPSArray(string pattern, int M, int lps[]) {
+void computeLPSArray(string pattern, int M, int lps[])
+{
     int length = 0;
     lps[0] = 0;
     int i = 1;
 
-    while (i < M) {
-        if (pattern[i] == pattern[length]) {
+    while (i < M) 
+    {
+        if (pattern[i] == pattern[length]) 
+        {
             length++;
             lps[i] = length;
             i++;
-        } else {
-            if (length != 0) {
+         } else 
+        {
+            if (length != 0)
+            {
                 length = lps[length - 1];
-            } else {
+            } else 
+            {
                 lps[i] = 0;
                 i++;
             }
@@ -32,7 +37,8 @@ void computeLPSArray(string pattern, int M, int lps[]) {
     }
 }
 
-bool KMPSearch(string pattern, string txt) {
+bool KMPSearch(string pattern, string txt)
+{
     int M = pattern.length();
     int N = txt.length();
 
@@ -42,17 +48,22 @@ bool KMPSearch(string pattern, string txt) {
     int i = 0;
     int j = 0;
     while (i < N) {
-        if (pattern[j] == txt[i]) {
+        if (pattern[j] == txt[i]) 
+        {
             j++;
             i++;
         }
 
-        if (j == M) {
+        if (j == M) 
+        {
             return true;
-        } else if (i < N && pattern[j] != txt[i]) {
-            if (j != 0) {
+        } else if (i < N && pattern[j] != txt[i]) 
+        {
+            if (j != 0)
+            {
                 j = lps[j - 1];
-            } else {
+            } else 
+            {
                 i = i + 1;
             }
         }
@@ -60,7 +71,8 @@ bool KMPSearch(string pattern, string txt) {
     return false;
 }
 
-void dijkstra(int graph[MAX_LOCATIONS][MAX_LOCATIONS], int src, int dist[], int pred[]) {
+void dijkstra(int graph[MAX_LOCATIONS][MAX_LOCATIONS], int src, int dist[], int pred[])
+{
     bool visited[MAX_LOCATIONS];
 
     for (int i = 0; i < MAX_LOCATIONS; ++i) {
@@ -83,7 +95,8 @@ void dijkstra(int graph[MAX_LOCATIONS][MAX_LOCATIONS], int src, int dist[], int 
         visited[u] = true;
 
         for (int v = 0; v < MAX_LOCATIONS; ++v) {
-            if (!visited[v] && graph[u][v] && dist[u] != INF && dist[u] + graph[u][v] < dist[v]) {
+            if (!visited[v] && graph[u][v] && dist[u] != INF && dist[u] + graph[u][v] < dist[v]) 
+            {
                 dist[v] = dist[u] + graph[u][v];
                 pred[v] = u;
             }
@@ -91,8 +104,10 @@ void dijkstra(int graph[MAX_LOCATIONS][MAX_LOCATIONS], int src, int dist[], int 
     }
 }
 
-void print_path(int pred[], int destination) {
-    if (pred[destination] == -1) {
+void print_path(int pred[], int destination) 
+{
+    if (pred[destination] == -1) 
+    {
         cout << destination;
         return;
     }
@@ -100,7 +115,8 @@ void print_path(int pred[], int destination) {
     cout << " -> " << destination;
 }
 
-void merge(pair<int, string> arr[], int left, int mid, int right) {
+void merge(pair<int, string> arr[], int left, int mid, int right) 
+{
     int n1 = mid - left + 1;
     int n2 = right - mid;
 
@@ -114,7 +130,8 @@ void merge(pair<int, string> arr[], int left, int mid, int right) {
     int i = 0, j = 0, k = left;
 
     while (i < n1 && j < n2) {
-        if (L[i].first <= R[j].first) {
+        if (L[i].first <= R[j].first) 
+        {
             arr[k] = L[i];
             i++;
         } else {
@@ -124,7 +141,8 @@ void merge(pair<int, string> arr[], int left, int mid, int right) {
         k++;
     }
 
-    while (i < n1) {
+    while (i < n1) 
+    {
         arr[k] = L[i];
         i++;
         k++;
@@ -137,7 +155,8 @@ void merge(pair<int, string> arr[], int left, int mid, int right) {
     }
 }
 
-void mergeSort(pair<int, string> arr[], int left, int right) {
+void mergeSort(pair<int, string> arr[], int left, int right) 
+{
     if (left < right) {
         int mid = left + (right - left) / 2;
 
@@ -199,7 +218,7 @@ int main() {
         cout << endl;
     }
 
-    return 0;
+    return 0;
 }
 
 
@@ -211,7 +230,8 @@ int main() {
 using namespace std;
 
 // Function to display the main menu
-void displayMenu() {
+void displayMenu() 
+{
     cout << "\nWelcome to Smart City Special Cab Service\n";
     cout << "1. Book a cab to a location\n";
     cout << "2. Order medicine delivery\n";
@@ -220,7 +240,8 @@ void displayMenu() {
 }
 
 // Function to find the minimum key value
-int minKey(vector<int> &key, vector<bool> &mstSet, int n) {
+int minKey(vector<int> &key, vector<bool> &mstSet, int n) 
+{
     int min = INT_MAX, min_index;
     for (int v = 0; v < n; v++) {
         if (!mstSet[v] && key[v] < min) {
@@ -231,7 +252,8 @@ int minKey(vector<int> &key, vector<bool> &mstSet, int n) {
 }
 
 // Function to find and display the MST using Prim's Algorithm
-void primMST(vector<vector<int>> &graph, int src, int dest) {
+void primMST(vector<vector<int>> &graph, int src, int dest) 
+{
     int n = graph.size();
     vector<int> parent(n);
     vector<int> key(n, INT_MAX);
@@ -271,7 +293,8 @@ void primMST(vector<vector<int>> &graph, int src, int dest) {
 }
 
 // Boyer-Moore pattern matching algorithm
-int boyerMooreSearch(const string &text, const string &pattern) {
+int boyerMooreSearch(const string &text, const string &pattern) 
+{
     int m = pattern.size();
     int n = text.size();
 
@@ -334,7 +357,8 @@ void bookCab() {
 }
 
 // Function to simulate medicine delivery
-void orderMedicine() {
+void orderMedicine() 
+{
     vector<pair<string, int>> medicines = {
         {"Paracetamol", 50},
         {"Ibuprofen", 100},
@@ -362,7 +386,8 @@ void orderMedicine() {
     }
 }
 
-int main() {
+int main() 
+{
     int choice;
     do {
         displayMenu();
